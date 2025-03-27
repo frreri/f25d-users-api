@@ -2,7 +2,7 @@
 
 @layer components {
   .user-card {
-    @apply rounded-lg bg-blue-700 p-4;
+    @apply rounded-md bg-blue-700 p-4;
   }
 }
 
