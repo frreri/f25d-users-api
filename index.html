@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Just web app for testing api data fetching"
+    />
     <title>Users</title>
     <link rel="stylesheet" href="./css/style.min.css" />
     <script src="./script/app.js" defer></script>
@@ -10,12 +14,13 @@
   <body
     class="grid min-h-lvh grid-cols-1 grid-rows-[80px_1fr_80px] text-gray-50"
   >
-    <header class="flex items-center justify-between bg-blue-700 p-2">
+    <header class="flex items-center justify-between bg-blue-700 pr-4 pl-4">
       <h1
         class="rounded-md bg-gray-50 p-1 text-3xl font-bold text-blue-700 md:bg-blue-700 md:text-gray-50"
       >
-        Users
+        USERS
       </h1>
+      <span class="uppercase max-md:hidden">Click user card for more info</span>
       <div class="flex-center h-10">
         <label
           aria-labelledby="search-label"

@@ -2,7 +2,6 @@
 
 const userContainer = document.getElementById('user-container');
 const searchInput = document.getElementById('search-input');
-const overlay = document.getElementById('overlay');
 
 class UserApp {
   #users;
@@ -47,7 +46,7 @@ class UserApp {
           <h2 class="font-bold">${user.name}</h2>
           <p>Username: ${user.username}</p>
           <p>Email: ${user.email}</p>
-          <div class="mt-4 blur-xs">
+          <div class="mt-2 invisible">
             <p>City: ${user.address.city}</p>
             <p>Phone: ${user.phone}</p>
             <p>Company: ${user.company.name}</p>
@@ -78,7 +77,7 @@ class UserApp {
   #displayMoreInfo(e) {
     const userCard = e.target.closest('.user-card');
     if (userCard) {
-      userCard.querySelector('div').classList.toggle('blur-xs');
+      userCard.querySelector('div').classList.toggle('invisible');
     }
   }
 }
