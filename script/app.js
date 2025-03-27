@@ -51,7 +51,7 @@ class UserApp {
             <p>Phone: ${user.phone}</p>
             <p>Company: ${user.company.name}</p>
           </div>
-        </article
+        </article>
       `;
       userContainer.insertAdjacentHTML('beforeend', html);
     });
