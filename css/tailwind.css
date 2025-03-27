@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+
+@layer components {
+  .user-card {
+    @apply rounded-lg bg-blue-700 p-4;
+  }
+}
+
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+}
