@@ -1,47 +1,51 @@
 'use strict';
 
-const userContainer = document.getElementById('user-container');
-const searchInput = document.getElementById('search-input');
+// Running all the code within a block to make it a private scope not reachable from browser console
+// Extra encapsulation
 
-class UserApp {
-  #users;
-  #apiUrl;
+{
+  const userContainer = document.getElementById('user-container');
+  const searchInput = document.getElementById('search-input');
 
-  constructor(url) {
-    this.#apiUrl = url;
-  }
+  class UserApp {
+    #users;
+    #apiUrl;
 
-  // Went with initializer approach as constructor can't be async
-  // I went with strong encapsulation, the initializer is my only public method
-  async initialize() {
-    // Getting users from API once
-    try {
-      await this.#fetchUsers();
-      // Displaying all users by default
-      this.#displayUsers();
-
-      // Adding event listeners
-      searchInput.addEventListener('keyup', this.#userSearch.bind(this));
-      userContainer.addEventListener('click', this.#displayMoreInfo);
-    } catch (err) {
-      this.#displayError(err);
+    constructor(url) {
+      this.#apiUrl = url;
     }
-  }
 
-  async #fetchUsers() {
-    const response = await fetch(this.#apiUrl);
-    if (!response.ok)
-      throw new Error(`Problem fetching users (HTTP ${response.status})`);
-    const data = await response.json();
-    // unpacking data with ... into a new array, very clean
-    this.#users = [...data];
-  }
+    // Went with initializer approach as constructor can't be async
+    // I went with strong encapsulation, the initializer is my only public method
+    async initialize() {
+      // Getting users from API once
+      try {
+        await this.#fetchUsers();
+        // Displaying all users by default
+        this.#displayUsers();
 
-  #displayUsers(userArr) {
-    userContainer.innerHTML = '';
-    const users = userArr || this.#users;
-    users.forEach(user => {
-      const html = `
+        // Adding event listeners
+        searchInput.addEventListener('keyup', this.#userSearch.bind(this));
+        userContainer.addEventListener('click', this.#displayMoreInfo);
+      } catch (err) {
+        this.#displayError(err);
+      }
+    }
+
+    async #fetchUsers() {
+      const response = await fetch(this.#apiUrl);
+      if (!response.ok)
+        throw new Error(`Problem fetching users (HTTP ${response.status})`);
+      const data = await response.json();
+      // unpacking data with ... into a new array, very clean
+      this.#users = [...data];
+    }
+
+    #displayUsers(userArr) {
+      userContainer.innerHTML = '';
+      const users = userArr || this.#users;
+      users.forEach(user => {
+        const html = `
         <article class="user-card">
           <h2 class="font-bold">${user.name}</h2>
           <p>Username: ${user.username}</p>
@@ -53,46 +57,47 @@ class UserApp {
           </div>
         </article>
       `;
-      userContainer.insertAdjacentHTML('beforeend', html);
-    });
-  }
-
-  // applying search term from search input field before displaying users
-  #userSearch() {
-    if (searchInput.value) {
-      const searchMatch = userProp =>
-        userProp.toLowerCase().includes(searchInput.value.toLowerCase());
-      const filteredUsers = this.#users.filter(
-        user =>
-          searchMatch(user.name) ||
-          searchMatch(user.username) ||
-          searchMatch(user.email),
-      );
-      this.#displayUsers(filteredUsers);
-    } else {
-      this.#displayUsers();
+        userContainer.insertAdjacentHTML('beforeend', html);
+      });
     }
-  }
 
-  #displayMoreInfo(e) {
-    const userCard = e.target.closest('.user-card');
-    if (userCard) {
-      userCard.querySelector('div').classList.toggle('invisible');
+    // applying search term from search input field before displaying users
+    #userSearch() {
+      if (searchInput.value) {
+        const searchMatch = userProp =>
+          userProp.toLowerCase().includes(searchInput.value.toLowerCase());
+        const filteredUsers = this.#users.filter(
+          user =>
+            searchMatch(user.name) ||
+            searchMatch(user.username) ||
+            searchMatch(user.email),
+        );
+        this.#displayUsers(filteredUsers);
+      } else {
+        this.#displayUsers();
+      }
     }
-  }
 
-  #displayError(err) {
-    console.error(err);
-    const errorHTML = `
+    #displayMoreInfo(e) {
+      const userCard = e.target.closest('.user-card');
+      if (userCard) {
+        userCard.querySelector('div').classList.toggle('invisible');
+      }
+    }
+
+    #displayError(err) {
+      console.error(err);
+      const errorHTML = `
       <div class="error-msg">
         <h2 class="text-2xl">ERROR</h2>
         <p>Error when fetching users: ${err.message}</p>
       </div>
     `;
-    document.body.insertAdjacentHTML('beforeend', errorHTML);
+      document.body.insertAdjacentHTML('beforeend', errorHTML);
+    }
   }
-}
 
-// Instantiating and initializing the app
-const app = new UserApp('https://jsonplaceholder.typicode.com/users');
-app.initialize();
+  // Instantiating and initializing the app
+  const app = new UserApp('https://jsonplaceholder.typicode.com/users');
+  app.initialize();
+}
