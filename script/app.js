@@ -47,7 +47,7 @@ class UserApp {
           <h2 class="font-bold">${user.name}</h2>
           <p>Username: ${user.username}</p>
           <p>Email: ${user.email}</p>
-          <div class="mt-4 blur-xs select-none w-fit cursor-pointer">
+          <div class="mt-4 blur-xs">
             <p>City: ${user.address.city}</p>
             <p>Phone: ${user.phone}</p>
             <p>Company: ${user.company.name}</p>
@@ -76,9 +76,9 @@ class UserApp {
   }
 
   #displayMoreInfo(e) {
-    const userCard = e.target.closest('.select-none');
+    const userCard = e.target.closest('.user-card');
     if (userCard) {
-      userCard.classList.toggle('blur-xs');
+      userCard.querySelector('div').classList.toggle('blur-xs');
     }
   }
 }

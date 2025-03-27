@@ -2,7 +2,7 @@
 
 @layer components {
   .user-card {
-    @apply rounded-md bg-blue-700 p-4;
+    @apply cursor-pointer rounded-md bg-blue-700 p-4 select-none hover:bg-blue-600;
   }
 }
 
