@@ -2,6 +2,7 @@
 
 const userContainer = document.getElementById('user-container');
 const searchInput = document.getElementById('search-input');
+const overlay = document.getElementById('overlay');
 
 class UserApp {
   #users;
@@ -21,6 +22,7 @@ class UserApp {
 
     // Adding event listeners
     searchInput.addEventListener('keyup', this.#userSearch.bind(this));
+    userContainer.addEventListener('click', this.#displayMoreInfo);
   }
 
   async #fetchUsers() {
@@ -45,6 +47,11 @@ class UserApp {
           <h2 class="font-bold">${user.name}</h2>
           <p>Username: ${user.username}</p>
           <p>Email: ${user.email}</p>
+          <div class="mt-4 blur-xs select-none w-fit cursor-pointer">
+            <p>City: ${user.address.city}</p>
+            <p>Phone: ${user.phone}</p>
+            <p>Company: ${user.company.name}</p>
+          </div>
         </article
       `;
       userContainer.insertAdjacentHTML('beforeend', html);
@@ -65,6 +72,13 @@ class UserApp {
       this.#displayUsers(filteredUsers);
     } else {
       this.#displayUsers();
+    }
+  }
+
+  #displayMoreInfo(e) {
+    const userCard = e.target.closest('.select-none');
+    if (userCard) {
+      userCard.classList.toggle('blur-xs');
     }
   }
 }
