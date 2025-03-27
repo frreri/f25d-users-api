@@ -4,6 +4,10 @@
   .user-card {
     @apply cursor-pointer rounded-md bg-blue-700 p-4 select-none hover:bg-blue-600;
   }
+
+  .error-msg {
+    @apply fixed right-1/2 bottom-1/2 translate-1/2 rounded-md bg-red-600 p-5 text-gray-50 drop-shadow-2xl;
+  }
 }
 
 @layer utilities {
@@ -11,4 +15,3 @@
     @apply flex items-center justify-center;
   }
 }
-/*   */

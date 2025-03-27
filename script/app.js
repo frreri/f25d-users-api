@@ -15,26 +15,26 @@ class UserApp {
   // I went with strong encapsulation, the initializer is my only public method
   async initialize() {
     // Getting users from API once
-    await this.#fetchUsers();
-    // Displaying all users by default
-    this.#displayUsers();
+    try {
+      await this.#fetchUsers();
+      // Displaying all users by default
+      this.#displayUsers();
 
-    // Adding event listeners
-    searchInput.addEventListener('keyup', this.#userSearch.bind(this));
-    userContainer.addEventListener('click', this.#displayMoreInfo);
+      // Adding event listeners
+      searchInput.addEventListener('keyup', this.#userSearch.bind(this));
+      userContainer.addEventListener('click', this.#displayMoreInfo);
+    } catch (err) {
+      this.#displayError(err);
+    }
   }
 
   async #fetchUsers() {
-    try {
-      const response = await fetch(this.#apiUrl);
-      if (!response.ok)
-        throw new Error(`Problem fetching users (HTTP ${response.status})`);
-      const data = await response.json();
-      // unpacking data with ... into a new array, very clean
-      this.#users = [...data];
-    } catch (err) {
-      console.log('Implement displaying error asap');
-    }
+    const response = await fetch(this.#apiUrl);
+    if (!response.ok)
+      throw new Error(`Problem fetching users (HTTP ${response.status})`);
+    const data = await response.json();
+    // unpacking data with ... into a new array, very clean
+    this.#users = [...data];
   }
 
   #displayUsers(userArr) {
@@ -79,6 +79,17 @@ class UserApp {
     if (userCard) {
       userCard.querySelector('div').classList.toggle('invisible');
     }
+  }
+
+  #displayError(err) {
+    console.error(err);
+    const errorHTML = `
+      <div class="error-msg">
+        <h2 class="text-2xl">ERROR</h2>
+        <p>Error when fetching users: ${err.message}</p>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', errorHTML);
   }
 }
 
