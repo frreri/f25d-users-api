@@ -3,7 +3,7 @@
 
 This is a small web application I made as a turn in for my Frontend Development class.
 It fetches mocked user data from a web API and displays it as cards in a grid.
-The grid can be searched/filtered in realtime by typing in the search input field.
+The grid can be searched/filtered in realtime by typing in the search input field, the cards can be clicked to reveal more info
 
 
 For this web app I went with a class approach where the app itself is a class that i import into the main file, then instatiate and initialize.
