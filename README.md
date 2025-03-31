@@ -11,3 +11,10 @@ In the class I make use of private fields and methods with #, the instantiating 
 
 
 Live preview: [Click here!](https://frreri.github.io/f25d-users-api/)
+
+
+Code validates with no errors or warnings in w3c html validator.
+
+
+The page gets almost perfect score in Chrome's Lighthouse
+![Image](https://github.com/user-attachments/assets/5d5f77a5-724c-4c31-8f5f-54d5ca7e56dd)
