@@ -29,8 +29,8 @@ export class UserApp {
 
   async #fetchUsers() {
     const response = await fetch(this.#apiUrl);
+    // error is thrown in this method, and caught in initialize which calls fetchUsers
     if (!response.ok)
-      // error is thrown in this method, and caught in initialize which calls fetchUsers
       throw new Error(`Problem fetching users (HTTP ${response.status})`);
     const data = await response.json();
     // unpacking data with ... into a new array, very clean
