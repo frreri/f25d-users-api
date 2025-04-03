@@ -1,4 +1,4 @@
-export class UserApp {
+export class App {
   #users;
   #apiUrl;
   #containerEl;
@@ -12,7 +12,7 @@ export class UserApp {
 
   // Went with initializer approach as constructor can't be async
   // I went with strong encapsulation, the initializer is my only public method
-  async initialize() {
+  async init() {
     // Getting users from API once
     try {
       await this.#fetchUsers();
