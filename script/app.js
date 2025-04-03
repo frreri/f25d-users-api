@@ -44,9 +44,9 @@ export class App {
       const html = `
       <article class="user-card">
         <div>
-        <h2 class="font-bold">${user.name}</h2>
-        <p>Username: ${user.username}</p>
-        <p>Email: ${user.email}</p>
+          <h2 class="font-bold">${user.name}</h2>
+          <p>Username: ${user.username}</p>
+          <p>Email: ${user.email}</p>
         </div>
         <button class="details-btn">Details</button>
         <div id="details" class="my-auto hidden">
