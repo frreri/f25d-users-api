@@ -21,7 +21,7 @@ export class App {
 
       // Adding event listeners
       this.#searchEl.addEventListener('keyup', this.#userSearch.bind(this));
-      this.#containerEl.addEventListener('click', this.#displayMoreInfo);
+      this.#containerEl.addEventListener('click', this.#displayDetails);
     } catch (err) {
       this.#displayError(err);
     }
@@ -43,10 +43,13 @@ export class App {
     users.forEach(user => {
       const html = `
       <article class="user-card">
+        <div>
         <h2 class="font-bold">${user.name}</h2>
         <p>Username: ${user.username}</p>
         <p>Email: ${user.email}</p>
-        <div class="mt-2 invisible">
+        </div>
+        <button class="details-btn">Details</button>
+        <div id="details" class="my-auto hidden">
           <p>City: ${user.address.city}</p>
           <p>Phone: ${user.phone}</p>
           <p>Company: ${user.company.name}</p>
@@ -74,10 +77,12 @@ export class App {
     }
   }
 
-  #displayMoreInfo(e) {
-    const userCard = e.target.closest('.user-card');
-    if (userCard) {
-      userCard.querySelector('div').classList.toggle('invisible');
+  #displayDetails(e) {
+    const button = e.target.closest('button');
+    if (button) {
+      const userCard = e.target.closest('.user-card');
+      userCard.querySelector('#details').classList.toggle('hidden');
+      userCard.classList.toggle('row-span-2');
     }
   }
 

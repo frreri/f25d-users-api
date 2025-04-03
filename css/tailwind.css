@@ -2,7 +2,11 @@
 
 @layer components {
   .user-card {
-    @apply cursor-pointer rounded-md bg-blue-700 p-4 select-none hover:bg-blue-600;
+    @apply flex flex-col items-start rounded-md bg-blue-700 p-4;
+  }
+
+  .details-btn {
+    @apply mt-4 cursor-pointer rounded-md bg-blue-800 px-3 py-1 text-gray-50 hover:bg-blue-900;
   }
 
   .error-msg {
